@@ -27,4 +27,4 @@ const CaptainContext = ({children}) => {
   );
 };
 
-export default CaptainContext
+export default CaptainContext;

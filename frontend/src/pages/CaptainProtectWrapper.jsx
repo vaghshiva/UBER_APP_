@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { CaptainDataContext } from '../context/CaptainContext'
+import axios from 'axios'
 
 const CaptainProtectWrapper = ({children}) => {
     const token=localStorage.getItem('token')
@@ -18,13 +19,12 @@ const CaptainProtectWrapper = ({children}) => {
           }
         }).then((response)=>{
           if(response.status===200){
-            const data=response.data
-            setCaptain(data.captain)
+            setCaptain(response.data.captain)
             setIsLoading(false)
           }
         })
         .catch(err=>{
-          console.log(err)
+          localStorage.removeItem('token')
           navigate('/captain-login')
         })
     },[token])
